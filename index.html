@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Web App</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="app-title">
+                    <i class="fas fa-cloud-sun"></i>
+                    Weather App
+                </div>
+                <button id="locationBtn" class="location-btn">
+                    <i class="fas fa-location-arrow"></i>
+                    Use My Location
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input id="searchInput" type="text" placeholder="Search for a city or location..." autocomplete="off">
+                    <button id="searchBtn" class="search-btn" title="Search">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <!-- Search Suggestions Dropdown -->
+                <div id="suggestionsDropdown" class="suggestions-dropdown" style="display:none;">
+                    <div class="suggestions-header">
+                        <span class="suggestions-title">Search Suggestions</span>
+                        <button id="clearRecentBtn" class="clear-recent-btn" title="Clear Recent Searches">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div id="suggestionsContainer" class="suggestions-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section id="alertsSection" class="alerts-section" style="display:none;">
+            <div class="alert-banner">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Weather Alert</div>
+                    <div id="alertMessage" class="alert-message"></div>
+                </div>
+                <button id="alertClose" class="alert-close" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state" style="display:none;">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <div>Loading weather data...</div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-state" style="display:none;">
+            <div class="error-content">
+                <i class="fas fa-exclamation-circle"></i>
+                <h3>Oops! Something went wrong.</h3>
+                <p id="errorMessage"></p>
+                <button id="retryBtn" class="retry-btn">
+                    <i class="fas fa-redo"></i>
+                    Retry
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather -->
+            <section id="currentWeather" class="weather-card main-card" style="display:none;">
+                <div class="location-info">
+                    <div id="locationName" class="location-name"></div>
+                    <div id="locationDetails" class="location-details"></div>
+                    <div id="lastUpdated" class="last-updated"></div>
+                </div>
+                <div class="weather-main">
+                    <div class="temperature-section">
+                        <div id="temperature" class="temperature"></div>
+                        <div id="feelsLike" class="feels-like"></div>
+                    </div>
+                    <div class="weather-icon-section">
+                        <img id="weatherIcon" class="weather-icon" src="" alt="Weather Icon">
+                        <div id="weatherCondition" class="weather-condition"></div>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <i class="fas fa-eye"></i>
+                        <span class="detail-label">Visibility</span>
+                        <span id="visibility" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tint"></i>
+                        <span class="detail-label">Humidity</span>
+                        <span id="humidity" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <span class="detail-label">Wind</span>
+                        <span id="windSpeed" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-sun"></i>
+                        <span class="detail-label">UV Index</span>
+                        <span id="uvIndex" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-cloud-rain"></i>
+                        <span class="detail-label">Chance of Rain</span>
+                        <span id="chanceOfRain" class="detail-value"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section id="hourlyForecast" class="weather-card" style="display:none;">
+                <div class="section-title">
+                    <i class="fas fa-clock"></i>
+                    Hourly Forecast
+                </div>
+                <div id="hourlyContainer" class="hourly-container"></div>
+            </section>
+
+            <!-- Daily Forecast -->
+            <section id="dailyForecast" class="weather-card" style="display:none;">
+                <div class="section-title">
+                    <i class="fas fa-calendar-day"></i>
+                    7-Day Forecast
+                </div>
+                <div id="dailyContainer" class="daily-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="weather.js"></script>
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+</body>
+</html>
