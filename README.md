@@ -24,7 +24,7 @@ A modern, responsive weather web application that provides real-time weather inf
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/weather-web.git
+   git clone https://github.com/mahi-0012/weather-web.git
    cd weather-web
    ```
 
